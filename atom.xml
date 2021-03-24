@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-03-24T10:00:29.947Z</updated>
+  <updated>2021-03-24T11:59:07.248Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://example.com/2021/03/24/Objective-C-ProtocolBuffers%E4%BD%BF%E7%94%A8/"/>
     <id>http://example.com/2021/03/24/Objective-C-ProtocolBuffers%E4%BD%BF%E7%94%A8/</id>
     <published>2021-03-24T08:58:31.000Z</published>
-    <updated>2021-03-24T10:00:29.947Z</updated>
+    <updated>2021-03-24T11:59:07.248Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="ProtocolBuffers简介"><a href="#ProtocolBuffers简介" class="headerlink" title="ProtocolBuffers简介"></a>ProtocolBuffers简介</h1><p><strong><em>Protocolbuffer</em></strong>（下文简称PB）是由Google推出的一种数据交换格式，它独立于语言，独立于平台。用于分布式应用之间的数据通信或者异构环境下的数据交换。与传统的XML和JSON不同的是，它是一种二进制格式，转换效率非常快，由于它的跨平台、跨编程语言的特点，让它越来越普及，尤其是网络数据交换方面日趋成为一种主流。</p><p>Google 一开始提供了三种语言的实现：java、c++ 和 python，每一种实现都包含了相应语言的编译器以及库文件。当前PB的最新版本已经支持obj-c，c#，js，Ruby等语言。</p><h1 id="下载并安装代码生成器Protoc"><a href="#下载并安装代码生成器Protoc" class="headerlink" title="下载并安装代码生成器Protoc"></a>下载并安装代码生成器Protoc</h1><p><font face="华文中宋" ><font color="#006600">iOS开发不要使用brew直接下载PB，brew下载的版本是旧版本，不支持obj-c</font></font><br/></p><p>目前PB最新版本，下载链接：<br><a href="https://github.com/protocolbuffers/protobuf/releases">https://github.com/protocolbuffers/protobuf/releases</a></p><p>打开并下载最新的OSX版本</p><p>下载完成之后，将可执行文件拖入到<code>/usr/local/bin/</code>目录下即可</p><h1 id="使用protoc将-proto文件生成所需代码"><a href="#使用protoc将-proto文件生成所需代码" class="headerlink" title="使用protoc将.proto文件生成所需代码"></a>使用protoc将.proto文件生成所需代码</h1><ol><li>打开终端工具，打开.proto文件所在目录</li><li>输入命令<code>protoc XXX.proto --objc_out=&quot;./&quot;</code></li><li>执行完成之后，对应目录下面就会生成两个obj-c类文件：<code>xxx.pbobjc.h</code>和<code>xxx.phobjc.m</code></li><li>由于生成的代码文件是MRC，我们得手动在Xcode中手动配置ARC模式</li><li>在<code>TARGETS-&gt;XXX(项目名)-&gt;Build Phases-&gt;Compile Sources</code>中找到刚才生成的.m文件，将其<code>Compiler Flags</code>设置成<code>-fno-objc-arc</code></li></ol><h1 id="使用Cocopods"><a href="#使用Cocopods" class="headerlink" title="使用Cocopods"></a>使用Cocopods</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="ProtocolBuffers简介"><a href="#ProtocolBuffers简介" class="headerlink" title="ProtocolBuffers简介"></a>ProtocolBuffers简介</h1><p><strong><em>Protocolbuffer</em></strong>（下文简称PB）是由Google推出的一种数据交换格式，它独立于语言，独立于平台。用于分布式应用之间的数据通信或者异构环境下的数据交换。与传统的XML和JSON不同的是，它是一种二进制格式，转换效率非常快，由于它的跨平台、跨编程语言的特点，让它越来越普及，尤其是网络数据交换方面日趋成为一种主流。</p><p>Google 一开始提供了三种语言的实现：java、c++ 和 python，每一种实现都包含了相应语言的编译器以及库文件。当前PB的最新版本已经支持obj-c，c#，js，Ruby等语言。</p><h1 id="下载并安装代码生成器Protoc"><a href="#下载并安装代码生成器Protoc" class="headerlink" title="下载并安装代码生成器Protoc"></a>下载并安装代码生成器Protoc</h1><p><font face="华文中宋" ><font color="#006600">iOS开发不要使用brew直接下载PB，brew下载的版本是旧版本，不支持obj-c</font></font><br/></p><p>目前PB最新版本，下载链接：<br><a href="https://github.com/protocolbuffers/protobuf/releases">https://github.com/protocolbuffers/protobuf/releases</a></p><p>打开并下载最新的OSX版本</p><p>下载完成之后，将可执行文件拖入到<code>/usr/local/bin/</code>目录下即可</p><h1 id="使用protoc将-proto文件生成所需代码"><a href="#使用protoc将-proto文件生成所需代码" class="headerlink" title="使用protoc将.proto文件生成所需代码"></a>使用protoc将.proto文件生成所需代码</h1><ol><li>打开终端工具，打开.proto文件所在目录</li><li>输入命令<font color=#FF000><code>protoc XXX.proto --objc_out=&quot;./&quot;</code></font ><br/></li><li>执行完成之后，对应目录下面就会生成两个obj-c类文件：<code>xxx.pbobjc.h</code>和<code>xxx.phobjc.m</code></li><li>由于生成的代码文件是MRC，我们得手动在Xcode中手动配置ARC模式</li><li>在<code>TARGETS-&gt;XXX(项目名)-&gt;Build Phases-&gt;Compile Sources</code>中找到刚才生成的.m文件，将其<code>Compiler Flags</code>设置成<code>-fno-objc-arc</code></li></ol><h1 id="使用Cocopods"><a href="#使用Cocopods" class="headerlink" title="使用Cocopods"></a>使用Cocopods</h1>]]></content>
     
     
       
