@@ -156,12 +156,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -191,6 +191,173 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/25/%E5%A4%A7%E5%B0%8F%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Liu Jilin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小咸鱼的记事本">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/03/25/%E5%A4%A7%E5%B0%8F%E7%AB%AF/" class="post-title-link" itemprop="url">大小端</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-03-25 09:45:30 / 修改时间：10:41:54" itemprop="dateCreated datePublished" datetime="2021-03-25T09:45:30+08:00">2021-03-25</time>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>745</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>计算机系统内部是以字节进行存储，每个地址单元都是1字节（8bit），而不同的存储类型也有着不同的存储需求，同时32位系统和64位系统的存储需求也不尽相同。</p>
+<table>
+<thead>
+<tr>
+<th align="center">C类型</th>
+<th align="center">32位</th>
+<th align="center">64位</th>
+<th align="center"></th>
+<th align="center">C类型</th>
+<th align="center">32位</th>
+<th align="center">64位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">BOOL</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">short int</td>
+<td align="center">2</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center"></td>
+<td align="center">long</td>
+<td align="center">4</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">8</td>
+<td align="center">8</td>
+<td align="center"></td>
+<td align="center">float</td>
+<td align="center">4</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">char*</td>
+<td align="center">4</td>
+<td align="center">8</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>因此就存在一个，多个内存字节数据在内存中如何摆放的问题，不同的摆放顺序就导致了大端模式和小端模式的存在。</p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>假设一个4字节数据为<code>0x12 34 56 78</code>，其中<code>0x12</code>为高字节，<code>0x78</code>为低字节，将其存放在<code>0x4000 0000</code>的地址中，两种模式的区别为：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><code>0x4000 0000</code></th>
+<th align="center"><code>0x4000 0001</code></th>
+<th align="center"><code>0x4000 0002</code></th>
+<th align="center"><code>0x4000 0003</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>大端模式</td>
+<td align="center"><code>0x12</code></td>
+<td align="center"><code>0x34</code></td>
+<td align="center"><code>0x56</code></td>
+<td align="center"><code>0x78</code></td>
+</tr>
+<tr>
+<td>小端模式</td>
+<td align="center"><code>0x78</code></td>
+<td align="center"><code>0x56</code></td>
+<td align="center"><code>0x34</code></td>
+<td align="center"><code>0x12</code></td>
+</tr>
+</tbody></table>
+<h2 id="大端模式"><a href="#大端模式" class="headerlink" title="大端模式"></a>大端模式</h2><p><font color="red">高</font>字节存放在<font color="red">低</font>地址中，<font color="red">低</font>字节存放在<font color="red">高</font>地址中</p>
+<h2 id="小端模式"><a href="#小端模式" class="headerlink" title="小端模式"></a>小端模式</h2><p><font color="red">高</font>字节存放在<font color="red">高</font>地址中，<font color="red">低</font>字节存放在<font color="red">低</font>地址中</p>
+<h2 id="使用情况"><a href="#使用情况" class="headerlink" title="使用情况"></a>使用情况</h2><p>不同的硬件厂商对于大小端模式有着不同的标准</p>
+<ul>
+<li>Intel的80×86系列芯片使用小端存储模式</li>
+<li>ARM芯片默认采用小端，但可以切换为大端</li>
+<li>MIPS芯片采用大端，但可以在大小端之间切换</li>
+<li>在网络上传输的数据普遍采用的都是大端</li>
+</ul>
+<h1 id="大小端判断"><a href="#大小端判断" class="headerlink" title="大小端判断"></a>大小端判断</h1><p>通过将多字节数据拆分成单字节，然后判断存储的起始位置是高字节数据还是低字节数据</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0x12345678</span>;</span><br><span class="line">    <span class="keyword">char</span> cLowAddressValue = *(<span class="keyword">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (cLowAddressValue == <span class="number">0x12</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -324,7 +491,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-24 17:30:46" itemprop="dateModified" datetime="2021-03-24T17:30:46+08:00">2021-03-24</time>
+        <time title="修改时间：2021-03-25 09:48:24" itemprop="dateModified" datetime="2021-03-25T09:48:24+08:00">2021-03-25</time>
       </span>
 
   
@@ -424,7 +591,7 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">1k</span>
+    <span title="站点总字数">2k</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动

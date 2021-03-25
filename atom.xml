@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-03-24T11:59:07.248Z</updated>
+  <updated>2021-03-25T02:41:54.370Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>大小端</title>
+    <link href="http://example.com/2021/03/25/%E5%A4%A7%E5%B0%8F%E7%AB%AF/"/>
+    <id>http://example.com/2021/03/25/%E5%A4%A7%E5%B0%8F%E7%AB%AF/</id>
+    <published>2021-03-25T01:45:30.000Z</published>
+    <updated>2021-03-25T02:41:54.370Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>计算机系统内部是以字节进行存储，每个地址单元都是1字节（8bit），而不同的存储类型也有着不同的存储需求，同时32位系统和64位系统的存储需求也不尽相同。</p><table><thead><tr><th align="center">C类型</th><th align="center">32位</th><th align="center">64位</th><th align="center"></th><th align="center">C类型</th><th align="center">32位</th><th align="center">64位</th></tr></thead><tbody><tr><td align="center">BOOL</td><td align="center">1</td><td align="center">1</td><td align="center"></td><td align="center">short int</td><td align="center">2</td><td align="center">2</td></tr><tr><td align="center">int</td><td align="center">4</td><td align="center">4</td><td align="center"></td><td align="center">long</td><td align="center">4</td><td align="center">8</td></tr><tr><td align="center">double</td><td align="center">8</td><td align="center">8</td><td align="center"></td><td align="center">float</td><td align="center">4</td><td align="center">4</td></tr><tr><td align="center">char*</td><td align="center">4</td><td align="center">8</td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr></tbody></table><p>因此就存在一个，多个内存字节数据在内存中如何摆放的问题，不同的摆放顺序就导致了大端模式和小端模式的存在。</p><h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>假设一个4字节数据为<code>0x12 34 56 78</code>，其中<code>0x12</code>为高字节，<code>0x78</code>为低字节，将其存放在<code>0x4000 0000</code>的地址中，两种模式的区别为：</p><table><thead><tr><th></th><th align="center"><code>0x4000 0000</code></th><th align="center"><code>0x4000 0001</code></th><th align="center"><code>0x4000 0002</code></th><th align="center"><code>0x4000 0003</code></th></tr></thead><tbody><tr><td>大端模式</td><td align="center"><code>0x12</code></td><td align="center"><code>0x34</code></td><td align="center"><code>0x56</code></td><td align="center"><code>0x78</code></td></tr><tr><td>小端模式</td><td align="center"><code>0x78</code></td><td align="center"><code>0x56</code></td><td align="center"><code>0x34</code></td><td align="center"><code>0x12</code></td></tr></tbody></table><h2 id="大端模式"><a href="#大端模式" class="headerlink" title="大端模式"></a>大端模式</h2><p><font color="red">高</font>字节存放在<font color="red">低</font>地址中，<font color="red">低</font>字节存放在<font color="red">高</font>地址中</p><h2 id="小端模式"><a href="#小端模式" class="headerlink" title="小端模式"></a>小端模式</h2><p><font color="red">高</font>字节存放在<font color="red">高</font>地址中，<font color="red">低</font>字节存放在<font color="red">低</font>地址中</p><h2 id="使用情况"><a href="#使用情况" class="headerlink" title="使用情况"></a>使用情况</h2><p>不同的硬件厂商对于大小端模式有着不同的标准</p><ul><li>Intel的80×86系列芯片使用小端存储模式</li><li>ARM芯片默认采用小端，但可以切换为大端</li><li>MIPS芯片采用大端，但可以在大小端之间切换</li><li>在网络上传输的数据普遍采用的都是大端</li></ul><h1 id="大小端判断"><a href="#大小端判断" class="headerlink" title="大小端判断"></a>大小端判断</h1><p>通过将多字节数据拆分成单字节，然后判断存储的起始位置是高字节数据还是低字节数据</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0x12345678</span>;</span><br><span class="line">    <span class="keyword">char</span> cLowAddressValue = *(<span class="keyword">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (cLowAddressValue == <span class="number">0x12</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;简述&quot;&gt;&lt;a href=&quot;#简述&quot; class=&quot;headerlink&quot; title=&quot;简述&quot;&gt;&lt;/a&gt;简述&lt;/h1&gt;&lt;p&gt;计算机系统内部是以字节进行存储，每个地址单元都是1字节（8bit），而不同的存储类型也有着不同的存储需求，同时32位系统和64位系统的存储需</summary>
+      
+    
+    
+    
+    
+    <category term="计算机基础" scheme="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>Objective-C:ProtocolBuffers使用</title>
@@ -43,7 +65,7 @@
     <link href="http://example.com/2020/12/23/hello-world/"/>
     <id>http://example.com/2020/12/23/hello-world/</id>
     <published>2020-12-23T02:11:24.402Z</published>
-    <updated>2021-03-24T09:30:46.069Z</updated>
+    <updated>2021-03-25T01:48:24.643Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
     
