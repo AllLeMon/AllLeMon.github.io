@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-03-25T02:41:54.370Z</updated>
+  <updated>2021-03-25T08:45:48.085Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,51 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>点击UISearchBar搜索的数据UIAlertController无响应</title>
+    <link href="http://example.com/2021/03/25/%E7%82%B9%E5%87%BBUISearchBar%E6%90%9C%E7%B4%A2%E7%9A%84%E6%95%B0%E6%8D%AEUIAlertController%E6%97%A0%E5%93%8D%E5%BA%94/"/>
+    <id>http://example.com/2021/03/25/%E7%82%B9%E5%87%BBUISearchBar%E6%90%9C%E7%B4%A2%E7%9A%84%E6%95%B0%E6%8D%AEUIAlertController%E6%97%A0%E5%93%8D%E5%BA%94/</id>
+    <published>2021-03-25T08:30:38.000Z</published>
+    <updated>2021-03-25T08:45:48.085Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="报错警告"><a href="#报错警告" class="headerlink" title="报错警告"></a>报错警告</h1><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误警告内容</span></span><br><span class="line">Attempt to present &lt;<span class="built_in">UIAlertController</span>: <span class="number">0x6003305b7b70</span>&gt; on &lt;Fragment2ViewController: <span class="number">0x600038e9db70</span>&gt; (from &lt;Fragment2ViewController: <span class="number">0x600038e9db70</span>&gt;) which is already presenting &lt;<span class="built_in">UISearchController</span>: <span class="number">0x60003ce41b60</span>&gt;</span><br></pre></td></tr></table></figure><h1 id="出现情况"><a href="#出现情况" class="headerlink" title="出现情况"></a>出现情况</h1><p><code>UISearchController</code>关联了<code>UITableView</code>，其中<code>tableview</code>点击之后会跳出一个<code>alertview</code>。使用<code>searchbar</code>搜索之前，点击<code>cell</code>的<code>alertview</code>可以正常跳出并显示。然而，在用<code>searchbar</code>搜索过滤之后，点击<code>cell</code>之后无响应，并且产生错误警告。</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>在自定义弹窗<code>presentViewController</code>之前加上</p><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">self</span> dismissViewControllerAnimated:<span class="literal">YES</span> completion:<span class="literal">nil</span>]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;报错警告&quot;&gt;&lt;a href=&quot;#报错警告&quot; class=&quot;headerlink&quot; title=&quot;报错警告&quot;&gt;&lt;/a&gt;报错警告&lt;/h1&gt;&lt;figure class=&quot;highlight objectivec&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>内存（字节）对齐</title>
+    <link href="http://example.com/2021/03/25/%E5%86%85%E5%AD%98%EF%BC%88%E5%AD%97%E8%8A%82%EF%BC%89%E5%AF%B9%E9%BD%90/"/>
+    <id>http://example.com/2021/03/25/%E5%86%85%E5%AD%98%EF%BC%88%E5%AD%97%E8%8A%82%EF%BC%89%E5%AF%B9%E9%BD%90/</id>
+    <published>2021-03-25T06:52:16.000Z</published>
+    <updated>2021-03-25T08:28:22.732Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>占坑待写…</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;占坑待写…&lt;/p&gt;
+&lt;/blockquote&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="计算机基础" scheme="http://example.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>大小端</title>
