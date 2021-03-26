@@ -47,17 +47,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>内存（字节）对齐</title>
-    <url>/2021/03/25/%E5%86%85%E5%AD%98%EF%BC%88%E5%AD%97%E8%8A%82%EF%BC%89%E5%AF%B9%E9%BD%90/</url>
-    <content><![CDATA[<blockquote>
-<p>占坑待写…</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>计算机基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>大小端</title>
     <url>/2021/03/25/%E5%A4%A7%E5%B0%8F%E7%AB%AF/</url>
     <content><![CDATA[<h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>计算机系统内部是以字节进行存储，每个地址单元都是1字节（8bit），而不同的存储类型也有着不同的存储需求，同时32位系统和64位系统的存储需求也不尽相同。</p>
@@ -148,6 +137,17 @@
 </ul>
 <h1 id="大小端判断"><a href="#大小端判断" class="headerlink" title="大小端判断"></a>大小端判断</h1><p>通过将多字节数据拆分成单字节，然后判断存储的起始位置是高字节数据还是低字节数据</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0x12345678</span>;</span><br><span class="line">    <span class="keyword">char</span> cLowAddressValue = *(<span class="keyword">char</span>*)&amp;num;</span><br><span class="line">    <span class="keyword">if</span> (cLowAddressValue == <span class="number">0x12</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;大端\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;小端\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>计算机基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内存（字节）对齐</title>
+    <url>/2021/03/25/%E5%86%85%E5%AD%98%EF%BC%88%E5%AD%97%E8%8A%82%EF%BC%89%E5%AF%B9%E9%BD%90/</url>
+    <content><![CDATA[<blockquote>
+<p>占坑待写…</p>
+</blockquote>
+]]></content>
       <tags>
         <tag>计算机基础</tag>
       </tags>
