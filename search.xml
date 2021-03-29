@@ -33,6 +33,17 @@
       </tags>
   </entry>
   <entry>
+    <title>内存（字节）对齐</title>
+    <url>/2021/03/25/%E5%86%85%E5%AD%98%EF%BC%88%E5%AD%97%E8%8A%82%EF%BC%89%E5%AF%B9%E9%BD%90/</url>
+    <content><![CDATA[<blockquote>
+<p>占坑待写…</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>计算机基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2020/12/23/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -47,14 +58,20 @@
 ]]></content>
   </entry>
   <entry>
-    <title>内存（字节）对齐</title>
-    <url>/2021/03/25/%E5%86%85%E5%AD%98%EF%BC%88%E5%AD%97%E8%8A%82%EF%BC%89%E5%AF%B9%E9%BD%90/</url>
-    <content><![CDATA[<blockquote>
-<p>占坑待写…</p>
-</blockquote>
-]]></content>
+    <title>前序、中序、后序遍历非递归实现</title>
+    <url>/2021/03/29/%E5%89%8D%E5%BA%8F%E3%80%81%E4%B8%AD%E5%BA%8F%E3%80%81%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E9%9D%9E%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>二叉树的相关的问题，一直都是数据结构里面的重点和难点，也是面试和考试特别喜欢提到的东西。这三种深度优先遍历方式的非递归（迭代）代码也是困扰我蛮久的，以前我只知道用栈来实现，但是具体代码也不是很熟悉，这里记录一下。</p>
+<h1 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h1><p>前序遍历按照“根结点-左孩子-右孩子”的顺序进行访问。</p>
+<p>具体算法：先遍历左孩子，并输出。当左孩子遍历完后，取栈顶，找右孩子。此时循环还没有结束，再遍历它的左孩子，右孩子直至孩子全部遍历结束。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">preorderTraversal</span><span class="params">(<span class="keyword">_</span> root: TreeNode?)</span></span> -&gt; [<span class="type">Int</span>] &#123;</span><br><span class="line">        <span class="keyword">var</span> res = [<span class="type">Int</span>]()</span><br><span class="line">        <span class="keyword">var</span> stack = [<span class="type">TreeNode?</span>]()</span><br><span class="line">        <span class="keyword">var</span> node = root</span><br><span class="line">        </span><br><span class="line">         <span class="keyword">while</span> !stack.isEmpty || node != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">                res.append(node!.val)</span><br><span class="line">                stack.append(node!)</span><br><span class="line">                node = node!.<span class="keyword">left</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                node = stack.removeLast().<span class="keyword">right</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h1><p>中序遍历按照“左孩子-根节点-右孩子”的顺序进行访问。</p>
+<p>具体算法：先把左孩子入栈，不着急先输出，先把所有左孩子入栈。左孩子入栈结束，取栈顶，输出栈顶元素，遍历右孩子，右孩子入栈。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">inorderTraversal</span><span class="params">(<span class="keyword">_</span> root: TreeNode?)</span></span> -&gt; [<span class="type">Int</span>] &#123;</span><br><span class="line">        <span class="keyword">var</span> res = [<span class="type">Int</span>]()</span><br><span class="line">        <span class="keyword">var</span> node = root</span><br><span class="line">        <span class="keyword">var</span> stack = [<span class="type">TreeNode?</span>]()</span><br><span class="line">        <span class="keyword">while</span> !stack.isEmpty || node != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">                stack.append(node)</span><br><span class="line">                node = node!.<span class="keyword">left</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                node = stack.removeLast()</span><br><span class="line">                res.append(node!.val)</span><br><span class="line">                node = node!.<span class="keyword">right</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h1><p>后序遍历按照“左孩子-右孩子-根节点”的顺序进行访问。</p>
+<p>具体算法：由于后序和前序访问根节点的位次正好相反，我们可以利用这点，先遍历右孩子，入栈，然后将其输出到数组起始位置。若无右孩子，取栈顶，遍历左孩子。<strong>由于我们的遍历是反向的，所以每次输出节点的时候，必须将其放置在数组的起始位置。</strong></p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">postorderTraversal</span><span class="params">(<span class="keyword">_</span> root: TreeNode?)</span></span> -&gt; [<span class="type">Int</span>] &#123;</span><br><span class="line">        <span class="keyword">var</span> res = [<span class="type">Int</span>]()</span><br><span class="line">        <span class="keyword">var</span> stack = [<span class="type">TreeNode?</span>]()</span><br><span class="line">        <span class="keyword">var</span> node = root</span><br><span class="line">        <span class="keyword">while</span> !stack.isEmpty || node != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">                res.insert(node!.val,at:<span class="number">0</span>)</span><br><span class="line">                stack.append(node)</span><br><span class="line">                node = node!.<span class="keyword">right</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                node = stack.removeLast()!.<span class="keyword">left</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <tags>
-        <tag>计算机基础</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
